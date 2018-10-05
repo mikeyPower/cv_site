@@ -1,5 +1,6 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request, Flask
 from app import app
+from forms import ContactForm
 
 # index view function suppressed for brevity
 
@@ -7,18 +8,19 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'nickname': 'Power'}  # fake user
-    posts = [  # fake array of posts
-        {
-            'author': {'nickname': 'John'},
-            'body': 'fdsfdsfds'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'fdsfdsfds'
-        }
-    ]
-    return render_template("index.html",
-                           title='Home',
-                           user=user,
-posts=posts)
+
+    return render_template("index.html")
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+  form = ContactForm()
+
+  if request.method == 'POST':
+    if form.validate() == False:
+      flash('All fields are required.')
+      return render_template('contact.html', form=form)
+    else:
+      return 'Form posted.'
+
+  elif request.method == 'GET':
+    return render_template('contact.html', form=form)
