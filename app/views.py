@@ -24,3 +24,6 @@ def contact():
 
   elif request.method == 'GET':
     return render_template('contact.html', form=form)
+
+
+#Build a scrapper for the quotes section of the site to change it everyday
