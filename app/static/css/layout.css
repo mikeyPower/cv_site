@@ -326,22 +326,22 @@ ul#nav li.current a { color: #F06000; }
 }
 
 .java {
-  	width: 60%;
+  	width: 90%;
   	-moz-animation: java 2s ease;
   	-webkit-animation: java 2s ease;
 }
 .python {
-  	width: 55%;
+  	width: 75%;
   	-moz-animation: python 2s ease;
   	-webkit-animation: python 2s ease;
 }
 .c {
-  	width: 50%;
+  	width: 60%;
   	-moz-animation: c 2s ease;
   	-webkit-animation: c 2s ease;
 }
 .flask {
-  	width: 90%;
+  	width: 80%;
   	-moz-animation: flask 2s ease;
   	-webkit-animation: flask 2s ease;
 }
@@ -351,26 +351,26 @@ ul#nav li.current a { color: #F06000; }
   	-webkit-animation: sql 2s ease;
 }
 .haskell {
-  	width: 50%;
+  	width: 70%;
   	-moz-animation: haskell 2s ease;
   	-webkit-animation: haskell 2s ease;
 }
 
 @-moz-keyframes java {
   0%   { width: 0px;  }
-  100% { width: 60%;  }
+  100% { width: 90%;  }
 }
 @-moz-keyframes python {
   0%   { width: 0px;  }
-  100% { width: 55%;  }
+  100% { width: 75%;  }
 }
 @-moz-keyframes c {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 60%;  }
 }
 @-moz-keyframes flask {
   0%   { width: 0px;  }
-  100% { width: 90%;  }
+  100% { width: 80%;  }
 }
 @-moz-keyframes sql {
   0%   { width: 0px;  }
@@ -378,25 +378,25 @@ ul#nav li.current a { color: #F06000; }
 }
 @-moz-keyframes haskell {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 70%;  }
 }
 
 
 @-webkit-keyframes java {
   0%   { width: 0px;  }
-  100% { width: 60%;  }
+  100% { width: 90%;  }
 }
 @-webkit-keyframes python {
   0%   { width: 0px;  }
-  100% { width: 55%;  }
+  100% { width: 75%;  }
 }
 @-webkit-keyframes c {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 60%;  }
 }
 @-webkit-keyframes flask {
   0%   { width: 0px;  }
-  100% { width: 90%;  }
+  100% { width: 80%;  }
 }
 @-webkit-keyframes sql {
   0%   { width: 0px;  }
@@ -404,7 +404,7 @@ ul#nav li.current a { color: #F06000; }
 }
 @-webkit-keyframes haskell {
   0%   { width: 0px;  }
-  100% { width: 50%;  }
+  100% { width: 70%;  }
 }
 
 /* ------------------------------------------------------------------ */
