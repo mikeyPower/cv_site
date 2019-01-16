@@ -3,7 +3,9 @@ from app import app
 from forms import ContactForm
 
 # index view function suppressed for brevity
+#app = Flask(__name__)
 
+#app.secret_key = 'development key'
 
 @app.route('/')
 @app.route('/index')
