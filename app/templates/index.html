@@ -275,9 +275,37 @@
 
 
    <!-- Contact Section
-   ================================================== -->
-  {% include 'contact.html' %}
-<!-- Contact Section End-->
+   ================================================== 
+   <section id="contact">
+   {% block content %}
+     <h1>Contact Me</h1>
+     <form action="" method="post" novalidate>
+         {{ form.hidden_tag() }}
+         <p>
+             {{ form.name.label }}<br>
+             {{ form.name(size=32) }}
+         </p>
+         <p>
+             {{ form.email.label }}<br>
+             {{ form.email(size=32) }}
+         </p>
+         <p>
+             {{ form.subject.label }}<br>
+             {{ form.subject(size=32) }}
+         </p>
+         <p>
+             {{ form.message.label }}<br>
+             {{ form.message(size=32) }}
+         </p>
+         <p>
+             {{ form.email.label }}<br>
+             {{ form.email(size=32) }}
+         </p>
+
+         <p>{{ form.submit() }}</p>
+     </form>
+ {% endblock %}
+</section> Contact Section End-->
 
 
    <!-- footer

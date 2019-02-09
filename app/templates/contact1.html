@@ -1,0 +1,184 @@
+<!-- Contact Section
+
+================================================== -->
+<!--<section id="contact">-->
+
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Michael Power - CV Website</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+   <!-- Mobile Specific Metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+    ================================================== -->
+    <link href="{{ url_for('static', filename='css/default.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fonts.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/media-queries.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/magnific-popup.css') }}" rel="stylesheet">
+
+
+   <!-- Script
+   ================================================== -->
+   	<script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
+
+   <!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="static/favicon.png" >
+
+</head>
+
+<body>
+
+      <div class="row section-head">
+
+         <div class="two columns header-col">
+
+            <h1><span>Get In Touch.</span></h1>
+
+         </div>
+
+         <div class="ten columns">
+
+               <p class="lead">Please don't hesitate to contact me, simply fill out the form below and
+                 hit submit.
+               </p>
+
+         </div>
+
+      </div>
+
+      <div class="row">
+
+         <div class="eight columns">
+<!--
+
+            <form action="" method="post" id="contactForm" name="contactForm">
+       <fieldset>
+
+               <div>
+            <label for="contactName">Name <span class="required">*</span></label>
+            <input type="text" value="" size="35" id="contactName" name="contactName">
+               </div>
+
+               <div>
+            <label for="contactEmail">Email <span class="required">*</span></label>
+            <input type="text" value="" size="35" id="contactEmail" name="contactEmail">
+               </div>
+
+               <div>
+            <label for="contactSubject">Subject</label>
+            <input type="text" value="" size="35" id="contactSubject" name="contactSubject">
+               </div>
+
+               <div>
+                  <label for="contactMessage">Message <span class="required">*</span></label>
+                  <textarea cols="50" rows="15" id="contactMessage" name="contactMessage"></textarea>
+               </div>
+
+               <div>
+                  <button class="submit">Submit</button>
+                  <span id="image-loader">
+                     <img alt="" src="static/images/loader.gif">
+                  </span>
+               </div>
+
+             -->
+
+             {% block content %}
+             <div class="container">
+                  {% for message in get_flashed_messages() %}
+                  <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                   {{message}}
+                   <div>
+                     {% endfor %}
+
+                     {% block page_content %}{% endblock %}
+
+                   </div>
+               <form action="" method="post" novalidate>
+                   {{ form.hidden_tag() }}
+                   <p>
+                       {{ form.name.label }}<br>
+                       {{ form.name(size=32) }}
+                   </p>
+                   <p>
+                       {{ form.email.label }}<br>
+                       {{ form.email(size=32) }}
+                   </p>
+                   <p>
+                       {{ form.subject.label }}<br>
+                       {{ form.subject(size=32) }}
+                   </p>
+                   <p>
+                       {{ form.message.label }}<br>
+                       {{ form.message(size=32) }}
+                   </p>
+                   
+
+                   <p>{{ form.submit() }}</p>
+               </form>
+
+           {% endblock %}
+       </fieldset>
+        </form> <!-- Form End -->
+
+            <!-- contact-warning -->
+            <div id="message-warning"> Error boy</div>
+            <!-- contact-success -->
+        <div id="message-success">
+               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+        </div>
+
+         </div>
+
+
+         <aside class="four columns footer-widgets">
+
+            <div class="widget widget_contact">
+
+          <h4>Address and Phone</h4>
+          <p class="address">
+            Michael Power<br>
+            6 the Ring Bennettsbridge <br>
+            Co. Kilkenny<br>
+            <span>086 8612660</span>
+          </p>
+
+        </div>
+
+
+
+         </aside>
+
+   </div>
+
+
+   <!-- Java Script
+   ================================================== -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-migrate-1.2.1.min.js')}}"></script>
+
+   <script src="{{ url_for('static', filename='js/jquery.flexslider.js')}}"></script>
+   <script src="{{ url_for('static', filename='js/waypoints.js')}}"></script>
+   <script src="{{ url_for('static', filename='js/jquery.fittext.js')}}"></script>
+   <script src="{{ url_for('static', filename='js/magnific-popup.js')}}"></script>
+   <script src="{{ url_for('static', filename='js/init.js')}}"></script>
+
+</body>
+
+
+   </html>
+
+
+<!--</section>  Contact Section End-->
