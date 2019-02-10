@@ -7,12 +7,26 @@ from forms import ContactForm
 
 #app.secret_key = 'development key'
 
-@app.route('/')
+@app.route('/',methods=['GET', 'POST'])
 @app.route('/index')
 def index():
-    form = ContactForm()
+    #form = ContactForm()
     #print("Your in the contact section")
-    return render_template("index.html",form=form)
+    #return render_template("index.html",form=form)
+     form = ContactForm()
+     print("Your in the contact section")
+     if request.method == 'POST':
+       if form.validate() == False:
+         flash('All fields are required.')
+         print("flash")
+         return redirect(url_for('index',_anchor='contact'))
+         #return render_template("index.html")
+       else:
+         flash('Your message was sent, thank you!')
+         return redirect(url_for('index',_anchor='contact'))
+
+     elif request.method == 'GET':
+         return render_template("index.html",form=form)
 
 @app.route('/contact1', methods=['GET', 'POST'])
 def contact():
