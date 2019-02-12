@@ -2,12 +2,20 @@ from flask import render_template, flash, redirect, request, Flask, url_for
 from app import app
 from forms import ContactForm
 
-from flask_mail import Mail
+from flask_mail import Mail, Message
+from email.MIMEText import MIMEText
+from email.mime.multipart import MIMEMultipart
+#from flask.ext.sendmail import Message
 import re
+import smtplib
+import os
 # index view function suppressed for brevity
 #app = Flask(__name__)
 
 #app.secret_key = 'development key'
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+
 
 @app.route('/',methods=['GET', 'POST'])
 @app.route('/index')
@@ -39,13 +47,35 @@ def result():
                 return redirect(url_for('index',_anchor='contact'))
         print("Your message has been sent")
 
-        msg = Message(recipients=result["contactEmail"],
-                    sender="powerm3@tcd.ie",
-                      body=result["contactMessage"],
-                      subject=result["contactSubject"])
 
-        mail.send(msg)
+        #MAIL_SERVER = 'smtp.googlemail.com'
+        #MAIL_PORT = 465
+        #MAIL_USE_TLS = False
+        #MAIL_USE_SSL = True
+        #MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+        #MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
+
+
+    #    msg = Message(recipients=result["contactEmail"],
+        #            sender="powerm3@tcd.ie",
+        #              body=result["contactMessage"],
+        #              subject=result["contactSubject"])
+
+        #mail.send(msg)
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = result["contactSubject"]
+        msg['From'] = result["contactName"]
+        msg['To'] = "Michael Power"
+
+        msg.attach(MIMEText(result["contactMessage"], 'plain'))
+
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.ehlo()
+        server.starttls()
+        server.login(MAIL_USERNAME, MAIL_PASSWORD)
+        server.sendmail("powerm3@tcd.ie", [result["contactEmail"]], msg.as_string())
+        server.close()
 
 
         flash('Your message was sent, thank you!')
