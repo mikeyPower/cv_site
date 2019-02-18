@@ -73,6 +73,7 @@ def result():
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
+        server.ehlo()
         server.login(MAIL_USERNAME, MAIL_PASSWORD)
         server.sendmail("powerm3@tcd.ie", [result["contactEmail"]], msg.as_string())
         server.close()
