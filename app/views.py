@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, request, Flask, url_for
-from app import app
+#from app import app
 from forms import ContactForm
 
 from flask_mail import Mail, Message
@@ -10,9 +10,13 @@ import re
 import smtplib
 import os
 # index view function suppressed for brevity
-#app = Flask(__name__)
+app = Flask(__name__)
 
 #app.secret_key = 'development key'
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
+
+
 MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
@@ -36,7 +40,7 @@ def result():
         for k,v in result.items():
             print(k,v)
             if k == "contactEmail":
-                print("contact email")
+                #print("contact email")
                 if valid_email(v) == False:
                     flash('Email is not correct')
                     return redirect(url_for('index',_anchor='contact'))
@@ -74,7 +78,7 @@ def result():
         server.ehlo()
         server.starttls()
         server.login(MAIL_USERNAME, MAIL_PASSWORD)
-        server.sendmail("powerm3@tcd.ie", [result["contactEmail"]], msg.as_string())
+        server.sendmail(MAIL_USERNAME, [result["contactEmail"],"powerm3@tcd.ie"], msg.as_string())
         server.close()
 
 
@@ -95,5 +99,11 @@ def valid_email(input_email):
     else:
         return False
     #print("Email is invalid")
+
+
+
+
+if __name__ == '__main__':
+    app.run()
 
 #Build a scrapper for the quotes section of the site to change it everyday
