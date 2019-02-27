@@ -274,8 +274,50 @@
 
    <!-- Testimonials Section
    ================================================== -->
-   {% include 'test.html' %}
+
    <!-- Testimonials Section End-->
+
+   <section id="testimonials">
+
+      <div class="text-container">
+
+         <div class="row">
+
+            <div class="two columns header-col">
+
+               <h1><span>Client Testimonials</span></h1>
+
+            </div>
+
+            <div class="ten columns flex-container">
+
+               <div class="flexslider">
+
+                  <ul class="slides">
+
+                     <li>
+                       {% block content %}
+                        <blockquote>
+                           <p>{{quote}}
+                           </p>
+                           <cite>{{author}}</cite>
+                        </blockquote>
+
+                     </li> <!-- slide ends -->
+
+
+                  </ul>
+
+               </div> <!-- div.flexslider ends -->
+
+            </div> <!-- div.flex-container ends -->
+
+         </div> <!-- row ends -->
+
+       </div>  <!-- text-container ends -->
+
+   </section>
+
 
 
    <!-- Contact Section
@@ -309,7 +351,7 @@
 
             <div class="eight columns">
 
-              {% block content %}
+
               <div class="container">
                    {% for message in get_flashed_messages() %}
                    <div class="alert alert-warning">
@@ -407,7 +449,7 @@
 
    <!-- Java Script
    ================================================== -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
    <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-migrate-1.2.1.min.js')}}"></script>
 
