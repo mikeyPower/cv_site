@@ -38,7 +38,7 @@ def index():
 
 
 
-@app.route('www.mickpowers.com/result',methods = ['POST', 'GET'])
+@app.route('/result',methods = ['POST', 'GET'])
 def result():
    mail = Mail(app)
    form = ContactForm()
