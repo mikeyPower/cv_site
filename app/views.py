@@ -49,7 +49,7 @@ def result():
             print(k,v)
             if k == "contactEmail":
                 #print("contact email")
-                if valid_email(v) == False:
+                if valid_email(v.strip()) == False:
                     flash('Email is not correct')
                     return redirect(url_for('index',_anchor='contact'))
             #check if string is empty
@@ -87,7 +87,7 @@ def result():
         server.starttls()
         server.ehlo()
         server.login(MAIL_USERNAME, MAIL_PASSWORD)
-        server.sendmail(MAIL_USERNAME, [result["contactEmail"],"powerm3@tcd.ie"], msg.as_string())
+        server.sendmail(MAIL_USERNAME, [result["contactEmail"].strip(),"powerm3@tcd.ie"], msg.as_string())
         server.close()
 
 
