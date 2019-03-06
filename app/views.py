@@ -53,8 +53,8 @@ def result():
                     flash('Email is not correct')
                     return redirect(url_for('index',_anchor='contact'))
             #check if string is empty
-            if not v.strip():
-                flash('All fields are required.')
+            if not v.strip() and k != "contactSubject":
+                flash('Fields marked with a * should not be empty')
                 print("flash")
                 return redirect(url_for('index',_anchor='contact'))
         print("Your message has been sent")
@@ -80,14 +80,19 @@ def result():
         msg['From'] = result["contactName"]
         msg['To'] = "Michael Power"
 
-        msg.attach(MIMEText(result["contactMessage"], 'plain'))
+        msg.attach(MIMEText("This is a recipt of your"+
+       " message please do not reply to this email\n" + "Kind Regards,\n" + "Michael Power\n" +
+       "=================================================================================================\n"+
+       result["contactMessage"], 'plain'))
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
         server.ehlo()
         server.login(MAIL_USERNAME, MAIL_PASSWORD)
-        server.sendmail(MAIL_USERNAME, [result["contactEmail"].strip(),"powerm3@tcd.ie"], msg.as_string())
+        server.sendmail(MAIL_USERNAME, [result["contactEmail"].strip(),"powerm3@tcd.ie"],
+       msg.as_string())
+
         server.close()
 
 
