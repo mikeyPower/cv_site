@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 import re
 import smtplib
 import os
-
+import datetime
 import requests
 import urllib.request
 import time
@@ -33,8 +33,9 @@ MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 def index():
     #form = ContactForm()
     #print("Your in the contact section")
+    date = getTodaysDate()
     quotes = quote()
-    return render_template("index.html",quote=quotes[0],author=quotes[1])
+    return render_template("index.html",quote=quotes[0],author=quotes[1],day=date)
 
 
 
@@ -80,7 +81,7 @@ def result():
         msg['From'] = result["contactName"]
         msg['To'] = "Michael Power"
 
-        msg.attach(MIMEText("This is a recipt of your"+
+        msg.attach(MIMEText("Thank you for visiting www.mickpowers.com\n"+"This is a recipt of your"+
        " message please do not reply to this email\n" + "Kind Regards,\n" + "Michael Power\n" +
        "=================================================================================================\n"+
        result["contactMessage"], 'plain'))
@@ -149,6 +150,19 @@ def quote():
     return spit
 
 
+
+def getTodaysDate():
+    day_endings = {
+    1: 'st',
+    2: 'nd',
+    3: 'rd',
+    21: 'st',
+    22: 'nd',
+    23: 'rd',
+    31: 'st'}
+    now = datetime.datetime.now()
+    suffix = int(now.strftime("%d"))
+    return(now.strftime("%B %d")+day_endings.get(suffix, 'th'))
 
 if __name__ == '__main__':
     app.run()
