@@ -117,7 +117,7 @@ def valid_email(input_email):
 
 def quote():
 # Set the URL you want to webscrape from
-    url = 'https://www.brainyquote.com/quote_of_the_dayl'
+    url = 'https://www.brainyquote.com/quote_of_the_day'
 
 # Connect to the URL
     response = requests.get(url)

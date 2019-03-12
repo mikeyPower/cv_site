@@ -1,14 +1,14 @@
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField,TextField, TextAreaField, SubmitField,validators
 from wtforms.validators import DataRequired, ValidationError
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     openid = StringField('openid', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
 
 
-class ContactForm(Form):
+class ContactForm(FlaskForm):
   name = TextField("Name", [validators.Required("Please enter your name.")] )
   email = TextField("Email",[validators.Required("Please enter your email address")] )
   subject = TextField("Subject",[validators.Required("Please enter the subject")])
