@@ -146,7 +146,7 @@ def quote():
     newstr = quote_of_the_day.replace('"', "")
 
 #split string into quote and author
-    spit = newstr.split('-')
+    spit = newstr.rsplit('-',1)
     return spit
 
 
