@@ -164,6 +164,12 @@ def getTodaysDate():
     suffix = int(now.strftime("%d"))
     return(now.strftime("%B %d")+day_endings.get(suffix, 'th'))
 
+@app.after_request
+def add_header(response):
+    response.cache_control.public = True
+    response.cache_control.max_age = 300
+    return response
+
 if __name__ == '__main__':
     app.run()
 
