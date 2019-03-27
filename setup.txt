@@ -3,3 +3,4 @@ flask/bin/pip install flask-mail
 flask/bin/pip install flask-wtf
 flask/bin/pip install bs4
 flask/bin/pip install requests
+flask/bin/pip install mysqlclient
