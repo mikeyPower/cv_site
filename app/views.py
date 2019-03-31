@@ -15,6 +15,8 @@ import requests
 import urllib.request
 import time
 from bs4 import BeautifulSoup
+import MySQLdb
+
 
 # index view function suppressed for brevity
 app = Flask(__name__)
@@ -26,6 +28,13 @@ app.config['SECRET_KEY'] = SECRET_KEY
 
 MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
 MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+
+
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_HOST = os.environ['DB_HOST']
+DB_USERNAME = os.environ['DB_USERNAME']
+DB_NAME = os.environ['DB_NAME']
+
 
 
 @app.route('/',methods=['GET', 'POST'])
@@ -169,6 +178,17 @@ def add_header(response):
     response.cache_control.public = True
     response.cache_control.max_age = 300
     return response
+
+
+def connection():
+    dbconn = MySQLdb.connect(host = DB_HOST,
+                             user = DB_USERNAME,
+                             passwd = DB_PASSWORD,
+                             db = DB_NAME)
+    cur = dbconn.cursor()
+    return (cur, dbconn)
+
+
 
 if __name__ == '__main__':
     app.run()
