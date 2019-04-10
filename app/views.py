@@ -1,12 +1,9 @@
 from flask import render_template, flash, redirect, request, Flask, url_for
-#from app import app
 from forms import ContactForm
 
 from flask_mail import Mail, Message
-#from email.MIMEText import MIMEText
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-#from flask.ext.sendmail import Message
 import re
 import smtplib
 import os
@@ -37,17 +34,16 @@ DB_NAME = os.environ['DB_NAME']
 
 
 
+
 @app.route('/',methods=['GET', 'POST'])
-@app.route('/index')
 def index():
-    #form = ContactForm()
-    #print("Your in the contact section")
+
     date = getTodaysDate()
     quotes = quote()
     return render_template("index.html",quote=quotes[0],author=quotes[1],day=date)
 
 
-
+#mail server
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
    mail = Mail(app)
@@ -70,21 +66,7 @@ def result():
         print("Your message has been sent")
 
 
-        #MAIL_SERVER = 'smtp.googlemail.com'
-        #MAIL_PORT = 465
-        #MAIL_USE_TLS = False
-        #MAIL_USE_SSL = True
-        #MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-        #MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
-
-
-    #    msg = Message(recipients=result["contactEmail"],
-        #            sender="powerm3@tcd.ie",
-        #              body=result["contactMessage"],
-        #              subject=result["contactSubject"])
-
-        #mail.send(msg)
         msg = MIMEMultipart('alternative')
         msg['Subject'] = result["contactSubject"]
         msg['From'] = result["contactName"]
@@ -125,6 +107,7 @@ def valid_email(input_email):
     #print("Email is invalid")
 
 
+#web scrapper to get quotes everyday
 def quote():
 # Set the URL you want to webscrape from
     url = 'https://www.brainyquote.com/quote_of_the_day'
@@ -139,8 +122,8 @@ def quote():
 
 #quote is in meta tag
     quote = soup.findAll('meta')
+    quote_of_the_day = ""
 
-#print(quote)
 
 #find the twtter description as the quote lies in that reference
     for i in quote:
@@ -149,7 +132,12 @@ def quote():
             #print(i.attrs['content'])
                 quote_of_the_day = i.attrs['content']
         except:
-            a = 1
+            a = "Not everything that is faced can be changed, but nothing can be changed until it is faced.-James Baldwin"
+
+
+        #check if quote of the day string is empty
+    if not quote_of_the_day:
+        quote_of_the_day = a
 
 #remove quotes
     newstr = quote_of_the_day.replace('"', "")
@@ -173,11 +161,12 @@ def getTodaysDate():
     suffix = int(now.strftime("%d"))
     return(now.strftime("%B %d")+day_endings.get(suffix, 'th'))
 
-@app.after_request
-def add_header(response):
-    response.cache_control.public = True
-    response.cache_control.max_age = 300
-    return response
+#simple caching function
+#@app.after_request
+#def add_header(response):
+#    response.cache_control.public = True
+#    response.cache_control.max_age = 300
+#    return response
 
 
 def connection():
@@ -193,4 +182,3 @@ def connection():
 if __name__ == '__main__':
     app.run()
 
-#Build a scrapper for the quotes section of the site to change it everyday
