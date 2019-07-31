@@ -921,6 +921,13 @@ call-to-action .button {
    border: none;
 }
 
+.custom_case_right img {
+    float: right;
+    top: -150px;
+    position: relative;
+    right: -90px;
+    width:250px;
+}
 
 /* ------------------------------------------------------------------ */
 /* i. Footer
