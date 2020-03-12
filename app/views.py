@@ -7,12 +7,12 @@ from email.mime.multipart import MIMEMultipart
 import re
 import smtplib
 import os
-import datetime
 import requests
 import urllib.request
 import time
 from bs4 import BeautifulSoup
 import MySQLdb
+import datetime
 
 
 # index view function suppressed for brevity
@@ -40,6 +40,16 @@ def index():
 
     date = getTodaysDate()
     quotes = quote()
+    cursor = connection()
+    cur = cursor[0]
+    db = cursor[1]
+    todays_date = datetime.datetime.now()
+    today = todays_date.strftime('%Y-%m-%d')
+    try:
+        cur.execute("INSERT INTO quotes(quote,quote_date,author) VALUES (%s, %s, %s)", (quotes[0], today, quotes[1]))
+        db.commit()
+    except:
+        print()
     return render_template("index.html",quote=quotes[0],author=quotes[1],day=date)
 
 
@@ -161,14 +171,8 @@ def getTodaysDate():
     suffix = int(now.strftime("%d"))
     return(now.strftime("%B %d")+day_endings.get(suffix, 'th'))
 
-#simple caching function
-#@app.after_request
-#def add_header(response):
-#    response.cache_control.public = True
-#    response.cache_control.max_age = 300
-#    return response
 
-
+# Start MySQL database connection returning connection state and database
 def connection():
     dbconn = MySQLdb.connect(host = DB_HOST,
                              user = DB_USERNAME,
@@ -176,7 +180,6 @@ def connection():
                              db = DB_NAME)
     cur = dbconn.cursor()
     return (cur, dbconn)
-
 
 
 if __name__ == '__main__':
