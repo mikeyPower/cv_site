@@ -1,15 +1,12 @@
 from flask import render_template, flash, redirect, request, Flask, url_for
 from forms import ContactForm
-
-from flask_mail import Mail, Message
+from flask_mail import Mail
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import re
 import smtplib
 import os
 import requests
-import urllib.request
-import time
 from bs4 import BeautifulSoup
 import MySQLdb
 import datetime
