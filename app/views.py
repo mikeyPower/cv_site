@@ -80,9 +80,9 @@ def result():
         msg['To'] = "Michael Power"
 
         msg.attach(MIMEText("Thank you for visiting www.mickpowers.com\n"+"This is a recipt of your"+
-       " message please do not reply to this email\n" + "Kind Regards,\n" + "Michael Power\n" +
-       "=================================================================================================\n"+
-       result["contactMessage"], 'plain'))
+        " message please do not reply to this email\n" + "Kind Regards,\n" + "Michael Power\n" +
+        "=================================================================================================\n"+
+        result["contactMessage"], 'plain'))
 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
@@ -90,7 +90,7 @@ def result():
         server.ehlo()
         server.login(MAIL_USERNAME, MAIL_PASSWORD)
         server.sendmail(MAIL_USERNAME, [result["contactEmail"].strip(),"powerm3@tcd.ie"],
-       msg.as_string())
+        msg.as_string())
 
         server.close()
 
