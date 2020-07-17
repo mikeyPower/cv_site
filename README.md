@@ -14,3 +14,17 @@
        1: source flask/bin/activate (this starts the environment)
        2: python views.py (to run the app)
        3: in your web browser localhost:5000
+
+
+## Prerequisite
+In order to install all python modules needed run the following command.
+
+	$ ./install.sh
+
+
+## Run
+	$ cd app/
+	$ python views.py
+
+in your web browser type localhost:5000
+
